@@ -24,4 +24,4 @@ def digit_count(number, digit):
 
     return ret
 
-print digit_count(123,0)
+print digit_count(4446, 0)

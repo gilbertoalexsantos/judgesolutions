@@ -12,33 +12,41 @@ using namespace std;
 
 int a, b;
 
-int calc(int number, int digit, int flag=-1, int factor=1, int rest=0) {
-  if(flag == -1) 
-    flag = number;
-  if(number < 10)
-    return digit <= number;
-  if(flag == 0)
-    return 0;
-
-  int ret = 0;
-
-  int digit_unit = flag % 10;
-  flag /= 10;
-
-  ret += (flag - (digit == 0 && flag && factor != 1)) * factor;
-
-  if(digit != 0 || (digit == 0 && flag)) {
-    if(digit_unit == digit)
-      ret += rest + 1;
-    else if(digit_unit > digit)
-      ret += factor;
+int calc(int digit, int number) {
+  if (number == 0) {
+    return digit == 0;
   }
 
-  factor *= 10;
-  return ret + calc(number,digit,flag,factor,number % factor);
+  int prefix = number, factor = 1, cnt = 0;
+
+  while (prefix) {
+    int rdigit = prefix % 10;
+    int remainder = number % factor;
+    int nprefix = prefix / 10;
+
+    cnt += nprefix * factor;
+    if (rdigit == digit) {
+      cnt += remainder + 1;
+    } else if (rdigit > digit) {
+      cnt += factor;
+    }
+
+    factor *= 10;
+    prefix = nprefix;
+  }
+
+  if (!digit) {
+    int diff = 0;
+    for (int i = 10; i <= (factor / 10); i *= 10) {
+      diff += i;
+    }
+    cnt -= diff;
+  }
+
+  return cnt;
 }
 
-inline int calc(int digit) { return calc(b,digit) - calc(a-1,digit); }
+inline int calc(int digit) { return calc(digit, b) - calc(digit, a-1); }
 
 int main() {
   while(scanf("%d %d",&a,&b) && a+b) {
@@ -46,5 +54,5 @@ int main() {
     for(int i = 1; i < 10; i++)
       printf(" %d",calc(i));
     puts("");
-  } 
+  }
 }
