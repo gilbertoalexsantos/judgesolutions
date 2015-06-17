@@ -10,17 +10,27 @@ using namespace std;
 
 typedef long long ll;
 
-const int MAX = 1005;
-const char INVERSION = 'I', SUM = 'S';
+const int MAX = 3005;
+const char INVERSION = 'I';
 
-int n, m;
+int n, m, cnt;
 int inv[MAX][2];
-set<int> counter;
+set<int> mark;
 
-ll sumr(int a, int b) {
-  ll ma = min(a,b);
-  ll mb = max(a,b);
-  return (ma+mb) * (mb-ma+1LL) / 2LL;
+int pos(int u) {
+  for (int i = cnt-1; i >= 0; i--) {
+    if (u >= inv[i][0] && u <= inv[i][1]) {
+      u = inv[i][0] + inv[i][1] - u;
+    }
+  }
+  return u;
+}
+
+ll sumAp(int a, int b) {
+  if (a > b) {
+    swap(a, b);
+  }
+  return (a + b) * (b - a + 1LL) / 2LL;
 }
 
 ll sum(int a, int b) {
@@ -28,15 +38,22 @@ ll sum(int a, int b) {
 }
 
 int main() {
-  scanf("%d %d\n",&n,&m);
+  cnt = 0;
+  
+  scanf("%d %d\n", &n, &m);
   for(int i = 0; i < m; i++) {
     char op; int a, b;
-    scanf("%c %d %d",&op,&a,&b);
+    scanf("%c %d %d\n", &op, &a, &b);
     if(op == INVERSION) {
-      inv[m][0] = a; inv[m][1] = b;
-      counter.insert(a-1);
-      counter.insert(b);
-    } else
+      inv[cnt][0] = a;
+      inv[cnt++][1] = b;
+      
+      mark.insert(a-1);
+      mark.insert(b);
+    } else {
       printf("%lld\n",sum(a,b));
+    }
   }
+
+  printf("%d\n", pos(7));
 }
