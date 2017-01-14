@@ -50,18 +50,18 @@ int main () {
   scanf ("%d %d ", &n, &m);
   for (int i = 0; i < m; i++) {
     scanf (" %c %d %d", &t, &a, &b);
-        
+
     if (t == 'I') {
       inv[ni][0] = a;
       inv[ni][1] = b;
       mark.insert(a-1);
       mark.insert(b);
       ni++;
-         
+
     }
     else
       printf("%lld\n", sum(a, b));
   }
-  
+
   return 0;
 }

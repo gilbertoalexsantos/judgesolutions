@@ -6,7 +6,9 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+#include <vector>
 using namespace std;
+
 
 const int TRIES = 1000;
 
@@ -49,11 +51,11 @@ bool possible(int n, int p) {
     do {
       p2 = randn() % n;
     } while (p2 == p1);
-    
+
     int qt = 0;
     for (int j = 0; j < n; j++)
       qt += inside(points[j], points[p1], points[p2]);
-    
+
     if (qt >= neededPoints)
       return true;
   }

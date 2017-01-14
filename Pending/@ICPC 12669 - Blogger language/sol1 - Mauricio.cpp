@@ -5,7 +5,6 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
-
 using namespace std;
 
 const int NODES = 32*262144;
@@ -84,14 +83,14 @@ int main() {
         create(inp[i], root[i], 0, lenp - lent + 1);
       }
     }
-		
+
     int l, r;
     for(int i = 0; i < n; i++) {
       scanf("%d %d", &l, &r);
       l--; r--;
 
       int maxi = -1;
-      for(int i = 0; i < (1<<lent); i++) 
+      for(int i = 0; i < (1<<lent); i++)
         if(query(root[i], 0, lenp - lent + 1, l, r - lent + 1))
           maxi = max(maxi, i == 0 ? 0 : __builtin_popcount(i));
 
@@ -116,4 +115,3 @@ int main() {
     }
   }
 }
-

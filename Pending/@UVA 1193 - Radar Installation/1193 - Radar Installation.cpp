@@ -7,7 +7,6 @@
 #include <cstring>
 #include <cmath>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 typedef pair<double,double> dd;

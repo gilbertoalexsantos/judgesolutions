@@ -19,20 +19,22 @@ int dist[MAX_VERT][MAX_VERT];
 vector<int> graph[MAX_VERT];
 
 void clear() {
-	for(int i = 0; i < n; i++) {
+  for(int i = 0; i < n; i++) {
     graph[i].clear();
     for(int j = 0; j < n; j++)
-		  dist[i][j] = (i == j) ? 0 : INF;
+      dist[i][j] = (i == j) ? 0 : INF;
   }
 }
 
 void floyd() {
-	for(int k = 0; k < n; k++)
-		for(int i = 0; i < n; i++) for(int j = 0; j < n; j++)
-			dist[i][j] = min(dist[i][j],dist[i][k] + dist[k][j]);
+  for(int k = 0; k < n; k++)
+    for(int i = 0; i < n; i++)
+      for(int j = 0; j < n; j++)
+        dist[i][j] = min(dist[i][j],dist[i][k] + dist[k][j]);
 }
 
-int solve() {
+int solve()
+{
   int ans = INF;
   for(int i = 0; i < n; i++) {
   }
@@ -40,18 +42,18 @@ int solve() {
 }
 
 int main() {
-	int cases = 1, T; scanf("%d",&T);
-	while(T--) {
-		scanf("%d %d",&n,&m);	
-		clear();
-		for(int i = 0; i < m; i++) {
-			int x, y; scanf("%d %d",&x,&y);
+  int cases = 1, T; scanf("%d",&T);
+  while(T--) {
+    scanf("%d %d",&n,&m);
+    clear();
+    for(int i = 0; i < m; i++) {
+      int x, y; scanf("%d %d",&x,&y);
       graph[x].push_back(y); graph[y].push_back(x);
       dist[x][y] = dist[y][x] = 1;
-		}
-		floyd();
-		int ans = solve();
-		printf("Case #%d:\n%d\n",cases++,ans);
-		puts("");
-	}
+    }
+    floyd();
+    int ans = solve();
+    printf("Case #%d:\n%d\n",cases++,ans);
+    puts("");
+  }
 }

@@ -39,7 +39,7 @@ ll sum(int a, int b) {
 
 int main() {
   cnt = 0;
-  
+
   scanf("%d %d\n", &n, &m);
   for(int i = 0; i < m; i++) {
     char op; int a, b;
@@ -47,7 +47,7 @@ int main() {
     if(op == INVERSION) {
       inv[cnt][0] = a;
       inv[cnt++][1] = b;
-      
+
       mark.insert(a-1);
       mark.insert(b);
     } else {
@@ -56,4 +56,5 @@ int main() {
   }
 
   printf("%d\n", pos(7));
+
 }
