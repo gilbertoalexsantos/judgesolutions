@@ -1,5 +1,5 @@
 //Author: Gilberto A. dos Santos
-//Website: https://www.urionlinejudge.com.br/judge/en/problems/view/2050
+//Website: https://www.hackerrank.com/challenges/find-maximum-index-product/problem
 
 #include <iostream>
 #include <cstdio>
